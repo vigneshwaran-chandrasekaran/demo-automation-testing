@@ -12,9 +12,9 @@ import { Counter } from "../components";
 
 const { Header, Content, Sider } = Layout;
 
-const items1: MenuProps["items"] = ["1", "2", "3"].map((key) => ({
+const items1: MenuProps["items"] = ["Login", "Signup", "Student Form"].map((key) => ({
   key,
-  label: `nav ${key}`,
+  label: `${key}`,
 }));
 
 const Heading = styled.h1<{ active: boolean }>`
