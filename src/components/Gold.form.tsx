@@ -41,20 +41,27 @@ const GoldForm: FC<MyComponentProps> = ({ prop1, prop2, children }) => {
         <h1>Signup</h1>
         <Formik initialValues={initialValues} onSubmit={handleOnSubmit}>
           <Form>
-            <label htmlFor="firstName">First Name</label>
-            <Field id="firstName" name="firstName" placeholder="John" />
+            <div>
+              <label htmlFor="firstName">First Name</label>
+              <Field id="firstName" name="firstName" placeholder="John" />
+            </div>
+            <div>
+              <label htmlFor="lastName">Last Name</label>
+              <Field id="lastName" name="lastName" placeholder="Doe" />
+            </div>
 
-            <label htmlFor="lastName">Last Name</label>
-            <Field id="lastName" name="lastName" placeholder="Doe" />
-
-            <label htmlFor="email">Email</label>
-            <Field
-              id="email"
-              name="email"
-              placeholder="john@acme.com"
-              type="email"
-            />
-            <button type="submit">Submit</button>
+            <div>
+              <label htmlFor="email">Email</label>
+              <Field
+                id="email"
+                name="email"
+                placeholder="john@acme.com"
+                type="email"
+              />
+              <div>
+                <button type="submit">Submit</button>
+              </div>
+            </div>
           </Form>
         </Formik>
       </div>
