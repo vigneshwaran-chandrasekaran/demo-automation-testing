@@ -1,13 +1,9 @@
-import { Main, GoldForm, MyForm, TestForm, Registration } from "./components";
+import { Main } from "./components";
 
 function App() {
   return (
     <div>
       <Main />
-      <Registration />
-      <TestForm />
-      <MyForm />
-      <GoldForm />
     </div>
   );
 }
