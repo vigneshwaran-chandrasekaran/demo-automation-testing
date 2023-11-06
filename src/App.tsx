@@ -7,9 +7,7 @@ function App() {
       <Registration />
       <TestForm />
       <MyForm />
-      <GoldForm prop1="prop1" prop2={3}>
-        <p>testing</p>
-      </GoldForm>
+      <GoldForm />
     </div>
   );
 }

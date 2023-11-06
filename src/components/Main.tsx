@@ -1,25 +1,28 @@
 import React from "react";
-import styled from "styled-components";
 import {
   LaptopOutlined,
   NotificationOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { DatePicker, Space } from "antd";
-import type { MenuProps, DatePickerProps } from "antd";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import type { MenuProps } from "antd";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
-import { Counter } from "../components";
+import {
+  GoldForm,
+  MyForm,
+  TestForm,
+  Registration,
+  AntComponents,
+} from "../components";
 
 const { Header, Content, Sider } = Layout;
 
-const items1: MenuProps["items"] = ["Login", "Signup", "Student Form"].map((key) => ({
-  key,
-  label: `${key}`,
-}));
-
-const Heading = styled.h1<{ active: boolean }>`
-  color: ${(props) => (props.active ? "red" : "blue")};
-`;
+const items1: MenuProps["items"] = ["Login", "Signup", "Student Form"].map(
+  (key) => ({
+    key,
+    label: `${key}`,
+  })
+);
 
 const items2: MenuProps["items"] = [
   UserOutlined,
@@ -47,10 +50,6 @@ const Main: React.FC = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-
-  const onChange: DatePickerProps["onChange"] = (date, dateString) => {
-    console.log(date, dateString);
-  };
 
   return (
     <Layout>
@@ -87,16 +86,16 @@ const Main: React.FC = () => {
               background: colorBgContainer,
             }}
           >
-            <Counter />
-            <Heading active>Active</Heading>
-            <Heading active={false}>In Active</Heading>
-            <Space direction="vertical">
-              <DatePicker onChange={onChange} />
-              <DatePicker onChange={onChange} picker="week" />
-              <DatePicker onChange={onChange} picker="month" />
-              <DatePicker onChange={onChange} picker="quarter" />
-              <DatePicker onChange={onChange} picker="year" />
-            </Space>
+            <BrowserRouter>
+              <Routes>
+                <Route index element={<TestForm />} />
+                <Route path="registration" element={<Registration />} />
+                <Route path="gold" element={<GoldForm />} />
+                <Route path="antd" element={<AntComponents />} />
+                <Route path="my-form" element={<MyForm />} />
+                <Route path="*" element={<MyForm />} />
+              </Routes>
+            </BrowserRouter>
           </Content>
         </Layout>
       </Layout>

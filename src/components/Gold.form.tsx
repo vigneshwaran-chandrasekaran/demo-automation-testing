@@ -2,11 +2,7 @@ import React, { FC, ReactNode } from "react";
 import { Formik, Field, Form, FormikHelpers } from "formik";
 
 // Define the component's prop types
-interface MyComponentProps {
-  prop1: string;
-  prop2: number;
-  children: ReactNode;
-}
+interface MyComponentProps {}
 
 interface Values {
   firstName: string;
@@ -15,7 +11,7 @@ interface Values {
 }
 
 // Create a functional component
-const GoldForm: FC<MyComponentProps> = ({ prop1, prop2, children }) => {
+const GoldForm: FC<MyComponentProps> = () => {
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -34,9 +30,6 @@ const GoldForm: FC<MyComponentProps> = ({ prop1, prop2, children }) => {
 
   return (
     <div>
-      <h2>{prop1}</h2>
-      <p>{prop2}</p>
-      {children}
       <div>
         <h1>Signup</h1>
         <Formik initialValues={initialValues} onSubmit={handleOnSubmit}>
