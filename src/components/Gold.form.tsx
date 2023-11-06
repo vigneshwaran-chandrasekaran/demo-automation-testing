@@ -1,64 +1,66 @@
-import React, { FC, ReactNode } from "react";
-import { Formik, Field, Form, FormikHelpers } from "formik";
+import { FC } from "react";
+import { Formik, Field, Form, ErrorMessage, FormikHelpers } from "formik";
+import { Form as AntForm, Input, Button, Alert } from "antd";
+import * as Yup from "yup";
 
-// Define the component's prop types
-interface MyComponentProps {}
+const { Item } = AntForm;
 
-interface Values {
-  firstName: string;
-  lastName: string;
+interface IGoldFormProps {}
+
+interface FormValues {
+  name: string;
   email: string;
 }
 
-// Create a functional component
-const GoldForm: FC<MyComponentProps> = () => {
-  const initialValues = {
-    firstName: "",
-    lastName: "",
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required("Name is required"),
+  email: Yup.string().email("Invalid email").required("Email is required"),
+});
+
+const GoldForm: FC<IGoldFormProps> = () => {
+  const initialValues: FormValues = {
+    name: "",
     email: "",
   };
 
-  const handleOnSubmit = (
-    values: Values,
-    { setSubmitting }: FormikHelpers<Values>
+  const handleSubmit = (
+    values: FormValues,
+    { setSubmitting, resetForm }: FormikHelpers<FormValues>
   ) => {
     setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
+      // Simulate form submission
+      console.log("Submitted values:", values);
+      resetForm();
       setSubmitting(false);
     }, 500);
   };
 
   return (
-    <div>
-      <div>
-        <h1>Signup</h1>
-        <Formik initialValues={initialValues} onSubmit={handleOnSubmit}>
-          <Form>
-            <div>
-              <label htmlFor="firstName">First Name</label>
-              <Field id="firstName" name="firstName" placeholder="John" />
-            </div>
-            <div>
-              <label htmlFor="lastName">Last Name</label>
-              <Field id="lastName" name="lastName" placeholder="Doe" />
-            </div>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ isSubmitting }) => (
+        <Form>
+          <Item label="Name">
+            <Field type="text" name="name" as={Input} />
+            <ErrorMessage name="name" component={Alert} />
+          </Item>
 
-            <div>
-              <label htmlFor="email">Email</label>
-              <Field
-                id="email"
-                name="email"
-                placeholder="john@acme.com"
-                type="email"
-              />
-              <div>
-                <button type="submit">Submit</button>
-              </div>
-            </div>
-          </Form>
-        </Formik>
-      </div>
-    </div>
+          <Item label="Email">
+            <Field type="text" name="email" as={Input} />
+            <ErrorMessage name="email" component={Alert} />
+          </Item>
+
+          <Item>
+            <Button type="primary" htmlType="submit" loading={isSubmitting}>
+              Submit
+            </Button>
+          </Item>
+        </Form>
+      )}
+    </Formik>
   );
 };
 

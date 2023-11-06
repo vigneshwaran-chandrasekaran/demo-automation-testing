@@ -7,13 +7,7 @@ import {
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import type { MenuProps } from "antd";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
-import {
-  GoldForm,
-  MyForm,
-  TestForm,
-  Registration,
-  AntComponents,
-} from "../components";
+import { GoldForm, AntComponents } from "../components";
 
 const { Header, Content, Sider } = Layout;
 
@@ -88,12 +82,10 @@ const Main: React.FC = () => {
           >
             <BrowserRouter>
               <Routes>
-                <Route index element={<TestForm />} />
-                <Route path="registration" element={<Registration />} />
+                <Route index element={<GoldForm />} />
                 <Route path="gold" element={<GoldForm />} />
                 <Route path="antd" element={<AntComponents />} />
-                <Route path="my-form" element={<MyForm />} />
-                <Route path="*" element={<MyForm />} />
+                <Route path="*" element={<GoldForm />} />
               </Routes>
             </BrowserRouter>
           </Content>
