@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Formik, Field, Form, ErrorMessage, FormikHelpers } from "formik";
-import { Form as AntForm, Input, Button } from "antd";
+import { Form as AntForm, Input, Button, Col, Row } from "antd";
 import * as Yup from "yup";
 
 const { Item } = AntForm;
@@ -57,31 +57,96 @@ const GoldForm: FC<IGoldFormProps> = () => {
     >
       {({ isSubmitting }) => (
         <Form>
+          <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+            <Col className="gutter-row" span={6}>
+              <Item
+                label="Gold in Grams"
+                labelCol={{ span: 24 }}
+                wrapperCol={{ span: 24 }}
+              >
+                <Field
+                  type="number"
+                  name="goldInGrams"
+                  as={Input}
+                  placeholder="Gold in Grams"
+                />
+                <ErrorMessage name="goldInGrams" />
+              </Item>
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <Item
+                label="AED Gold Price"
+                labelCol={{ span: 24 }}
+                wrapperCol={{ span: 24 }}
+              >
+                <Field type="number" name="aedGoldPrice" as={Input} />
+                <ErrorMessage name="aedGoldPrice" />
+              </Item>
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <Item
+                label="INR Gold price"
+                labelCol={{ span: 24 }}
+                wrapperCol={{ span: 24 }}
+              >
+                <Field type="number" name="inrGoldPrice" as={Input} />
+                <ErrorMessage name="inrGoldPrice" />
+              </Item>
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <Item
+                label="AED to INR"
+                labelCol={{ span: 24 }}
+                wrapperCol={{ span: 24 }}
+              >
+                <Field type="number" name="aedToinr" as={Input} />
+                <ErrorMessage name="aedToinr" />
+              </Item>
+            </Col>
+          </Row>
           <Item
-            label="Gold Grams"
+            label="AED Gold Wastage"
             labelCol={{ span: 24 }}
             wrapperCol={{ span: 24 }}
           >
-            <Field type="number" name="goldInGrams" as={Input} placeholder="Gold in Grams"  />
-            <ErrorMessage name="goldInGrams" />
+            <Field type="number" name="aedWastage" as={Input} />
+            <ErrorMessage name="aedWastage" />
           </Item>
 
           <Item
-            label="AED Gold Price"
+            label="AED VAT Tax"
             labelCol={{ span: 24 }}
             wrapperCol={{ span: 24 }}
           >
-            <Field type="number" name="aedGoldPrice" as={Input} />
-            <ErrorMessage name="aedGoldPrice" />
+            <Field type="number" name="aedVat" as={Input} />
+            <ErrorMessage name="aedVat" />
           </Item>
 
           <Item
-            label="INR Gold price"
+            label="AED Card Charges"
             labelCol={{ span: 24 }}
             wrapperCol={{ span: 24 }}
           >
-            <Field type="number" name="inrGoldPrice" as={Input} />
-            <ErrorMessage name="inrGoldPrice" />
+            <Field type="number" name="aedCardCharges" as={Input} />
+            <ErrorMessage name="aedCardCharges" />
+          </Item>
+
+          <Item
+            label="INR Gold Wastage"
+            labelCol={{ span: 24 }}
+            wrapperCol={{ span: 24 }}
+          >
+            <Field type="number" name="inrGst" as={Input} />
+            <ErrorMessage name="inrGst" />
+          </Item>
+
+          <Item
+            label="INR Card Charges"
+            labelCol={{ span: 24 }}
+            wrapperCol={{ span: 24 }}
+          >
+            <Field type="number" name="inrCardCharges" as={Input} />
+            <ErrorMessage name="inrCardCharges" />
           </Item>
 
           <Item>
