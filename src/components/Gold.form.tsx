@@ -15,6 +15,7 @@ interface FormValues {
   aedWastage: number;
   aedVat: number;
   aedCardCharges: number;
+  inrWastage: number;
   inrGst: number;
   inrCardCharges: number;
 }
@@ -32,6 +33,7 @@ const initialValues: FormValues = {
   aedWastage: 10,
   aedVat: 5,
   aedCardCharges: 2.5,
+  inrWastage: 2.5,
   inrGst: 3,
   inrCardCharges: 0,
 };
@@ -75,6 +77,20 @@ const GoldForm: FC<IGoldFormProps> = () => {
             </Col>
             <Col className="gutter-row" span={6}>
               <Item
+                label="AED to INR"
+                labelCol={{ span: 24 }}
+                wrapperCol={{ span: 24 }}
+              >
+                <Field type="number" name="aedToinr" as={Input} />
+                <ErrorMessage name="aedToinr" />
+              </Item>
+            </Col>
+            <Col className="gutter-row" span={6}></Col>
+            <Col className="gutter-row" span={6}></Col>
+          </Row>
+          <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+            <Col className="gutter-row" span={6}>
+              <Item
                 label="AED Gold Price"
                 labelCol={{ span: 24 }}
                 wrapperCol={{ span: 24 }}
@@ -83,6 +99,38 @@ const GoldForm: FC<IGoldFormProps> = () => {
                 <ErrorMessage name="aedGoldPrice" />
               </Item>
             </Col>
+            <Col className="gutter-row" span={6}>
+              <Item
+                label="AED Gold Wastage"
+                labelCol={{ span: 24 }}
+                wrapperCol={{ span: 24 }}
+              >
+                <Field type="number" name="aedWastage" as={Input} />
+                <ErrorMessage name="aedWastage" />
+              </Item>
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <Item
+                label="AED VAT Tax"
+                labelCol={{ span: 24 }}
+                wrapperCol={{ span: 24 }}
+              >
+                <Field type="number" name="aedVat" as={Input} />
+                <ErrorMessage name="aedVat" />
+              </Item>
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <Item
+                label="AED Card Charges"
+                labelCol={{ span: 24 }}
+                wrapperCol={{ span: 24 }}
+              >
+                <Field type="number" name="aedCardCharges" as={Input} />
+                <ErrorMessage name="aedCardCharges" />
+              </Item>
+            </Col>
+          </Row>
+          <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
             <Col className="gutter-row" span={6}>
               <Item
                 label="INR Gold price"
@@ -95,65 +143,44 @@ const GoldForm: FC<IGoldFormProps> = () => {
             </Col>
             <Col className="gutter-row" span={6}>
               <Item
-                label="AED to INR"
+                label="INR Gold Wastage"
                 labelCol={{ span: 24 }}
                 wrapperCol={{ span: 24 }}
               >
-                <Field type="number" name="aedToinr" as={Input} />
-                <ErrorMessage name="aedToinr" />
+                <Field type="number" name="inrWastage" as={Input} />
+                <ErrorMessage name="inrWastage" />
+              </Item>
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <Item
+                label="INR GST Tax"
+                labelCol={{ span: 24 }}
+                wrapperCol={{ span: 24 }}
+              >
+                <Field type="number" name="inrGst" as={Input} />
+                <ErrorMessage name="inrGst" />
+              </Item>
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <Item
+                label="INR Card Charges"
+                labelCol={{ span: 24 }}
+                wrapperCol={{ span: 24 }}
+              >
+                <Field type="number" name="inrCardCharges" as={Input} />
+                <ErrorMessage name="inrCardCharges" />
               </Item>
             </Col>
           </Row>
-          <Item
-            label="AED Gold Wastage"
-            labelCol={{ span: 24 }}
-            wrapperCol={{ span: 24 }}
-          >
-            <Field type="number" name="aedWastage" as={Input} />
-            <ErrorMessage name="aedWastage" />
-          </Item>
-
-          <Item
-            label="AED VAT Tax"
-            labelCol={{ span: 24 }}
-            wrapperCol={{ span: 24 }}
-          >
-            <Field type="number" name="aedVat" as={Input} />
-            <ErrorMessage name="aedVat" />
-          </Item>
-
-          <Item
-            label="AED Card Charges"
-            labelCol={{ span: 24 }}
-            wrapperCol={{ span: 24 }}
-          >
-            <Field type="number" name="aedCardCharges" as={Input} />
-            <ErrorMessage name="aedCardCharges" />
-          </Item>
-
-          <Item
-            label="INR Gold Wastage"
-            labelCol={{ span: 24 }}
-            wrapperCol={{ span: 24 }}
-          >
-            <Field type="number" name="inrGst" as={Input} />
-            <ErrorMessage name="inrGst" />
-          </Item>
-
-          <Item
-            label="INR Card Charges"
-            labelCol={{ span: 24 }}
-            wrapperCol={{ span: 24 }}
-          >
-            <Field type="number" name="inrCardCharges" as={Input} />
-            <ErrorMessage name="inrCardCharges" />
-          </Item>
-
-          <Item>
-            <Button type="primary" htmlType="submit" loading={isSubmitting}>
-              Submit
-            </Button>
-          </Item>
+          <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+            <Col className="gutter-row" span={6}>
+              <Item>
+                <Button type="primary" htmlType="submit" loading={isSubmitting}>
+                  Submit
+                </Button>
+              </Item>
+            </Col>
+          </Row>
         </Form>
       )}
     </Formik>
