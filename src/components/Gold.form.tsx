@@ -8,10 +8,10 @@ const { Item } = AntForm;
 interface IGoldFormProps {}
 
 interface FormValues {
+  goldInGrams: number;
+  aedToinr: number;
   aedGoldPrice: number;
   inrGoldPrice: number;
-  aedToinr: number;
-  goldInGrams: number;
   aedWastage: number;
   aedVat: number;
   aedCardCharges: number;
@@ -21,15 +21,23 @@ interface FormValues {
 }
 
 const validationSchema = Yup.object().shape({
+  goldInGrams: Yup.number().required("Gold weight is required"),
+  aedToinr: Yup.number().required("AED to INR Price is required"),
   aedGoldPrice: Yup.number().required("AED Gold Price is required"),
   inrGoldPrice: Yup.number().required("INR Gold price is required"),
+  aedWastage: Yup.number(),
+  aedVat: Yup.number(),
+  aedCardCharges: Yup.number(),
+  inrWastage: Yup.number(),
+  inrGst: Yup.number(),
+  inrCardCharges: Yup.number(),
 });
 
 const initialValues: FormValues = {
-  aedGoldPrice: 222.5,
-  inrGoldPrice: 5635,
-  aedToinr: 22.66,
   goldInGrams: 20,
+  aedToinr: 22.66,
+  aedGoldPrice: 223.5,
+  inrGoldPrice: 5635,
   aedWastage: 10,
   aedVat: 5,
   aedCardCharges: 2.5,
@@ -38,17 +46,61 @@ const initialValues: FormValues = {
   inrCardCharges: 0,
 };
 
+const calculatePrice = (basePrice: number, percentage: number): number =>
+  Number((basePrice + basePrice * (percentage / 100)).toFixed(2));
+
+function getPriceDetails(values: FormValues) {
+  const {
+    goldInGrams,
+    aedToinr,
+    aedGoldPrice,
+    inrGoldPrice,
+    aedWastage,
+    aedVat,
+    aedCardCharges,
+    inrWastage,
+    inrGst,
+    inrCardCharges,
+  } = values;
+  let aedPrice = goldInGrams * aedGoldPrice;
+  console.log({ aedPrice });
+  if (aedWastage) {
+    aedPrice = calculatePrice(aedPrice, aedWastage);
+  }
+  if (aedVat) {
+    aedPrice = calculatePrice(aedPrice, aedVat);
+  }
+  console.log({ aedPrice });
+  if (aedCardCharges) {
+    aedPrice = calculatePrice(aedPrice, aedCardCharges);
+  }
+  console.log({ aedPrice });
+  let inrPrice = goldInGrams * inrGoldPrice;
+  console.log({ inrPrice });
+
+
+  if (inrWastage) {
+    inrPrice = calculatePrice(aedPrice, inrWastage);
+  }
+  if (inrGst) {
+    inrPrice = calculatePrice(aedPrice, inrGst);
+  }
+  console.log({ inrPrice });
+  if (inrCardCharges) {
+    inrPrice = calculatePrice(aedPrice, inrCardCharges);
+  }
+  console.log({ inrPrice });
+}
+
 const GoldForm: FC<IGoldFormProps> = () => {
   const handleSubmit = (
     values: FormValues,
     { setSubmitting, resetForm }: FormikHelpers<FormValues>
   ) => {
-    setTimeout(() => {
-      // Simulate form submission
-      console.log("Submitted values:", values);
-      resetForm();
-      setSubmitting(false);
-    }, 500);
+    console.log("Submitted values:", values);
+    getPriceDetails(values);
+    // resetForm();
+    setSubmitting(false);
   };
 
   return (
