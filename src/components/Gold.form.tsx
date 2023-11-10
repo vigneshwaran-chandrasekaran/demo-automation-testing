@@ -18,6 +18,15 @@ interface FormValues {
   inrWastage: number;
   inrGst: number;
   inrCardCharges: number;
+  aedTotal: number;
+  inrTotal: number;
+  inrSavings: number;
+}
+
+interface FormTotalValues {
+  aedTotal: number;
+  inrTotal: number;
+  inrSavings: number;
 }
 
 const validationSchema = Yup.object().shape({
@@ -44,12 +53,15 @@ const initialValues: FormValues = {
   inrWastage: 2.5,
   inrGst: 3,
   inrCardCharges: 0,
+  aedTotal: 0,
+  inrTotal: 0,
+  inrSavings: 0,
 };
 
 const calculatePrice = (basePrice: number, percentage: number): number =>
   Number((basePrice + basePrice * (percentage / 100)).toFixed(2));
 
-function getPriceDetails(values: FormValues) {
+function getPriceDetails(values: FormValues): FormTotalValues {
   const {
     goldInGrams,
     aedToinr,
@@ -78,7 +90,6 @@ function getPriceDetails(values: FormValues) {
   let inrPrice = goldInGrams * inrGoldPrice;
   console.log({ inrPrice });
 
-
   if (inrWastage) {
     inrPrice = calculatePrice(aedPrice, inrWastage);
   }
@@ -90,15 +101,20 @@ function getPriceDetails(values: FormValues) {
     inrPrice = calculatePrice(aedPrice, inrCardCharges);
   }
   console.log({ inrPrice });
+  return { inrTotal: inrPrice * aedToinr, aedTotal: aedPrice, inrSavings: 0 };
 }
 
 const GoldForm: FC<IGoldFormProps> = () => {
   const handleSubmit = (
     values: FormValues,
-    { setSubmitting, resetForm }: FormikHelpers<FormValues>
+    { setSubmitting, setFieldValue, resetForm }: FormikHelpers<FormValues>
   ) => {
     console.log("Submitted values:", values);
-    getPriceDetails(values);
+    const { inrTotal, aedTotal } = getPriceDetails(values);
+
+    setFieldValue("aedTotal", aedTotal);
+    setFieldValue("inrTotal", inrTotal);
+
     // resetForm();
     setSubmitting(false);
   };
@@ -223,6 +239,39 @@ const GoldForm: FC<IGoldFormProps> = () => {
                 <ErrorMessage name="inrCardCharges" />
               </Item>
             </Col>
+          </Row>
+          <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+            <Col className="gutter-row" span={6}>
+              <Item
+                label="AED Gold price"
+                labelCol={{ span: 24 }}
+                wrapperCol={{ span: 24 }}
+              >
+                <Field type="number" name="aedTotal" as={Input} />
+                <ErrorMessage name="aedTotal" />
+              </Item>
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <Item
+                label="INR Gold price"
+                labelCol={{ span: 24 }}
+                wrapperCol={{ span: 24 }}
+              >
+                <Field type="number" name="inrTotal" as={Input} />
+                <ErrorMessage name="inrTotal" />
+              </Item>
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <Item
+                label="INR GST Tax"
+                labelCol={{ span: 24 }}
+                wrapperCol={{ span: 24 }}
+              >
+                <Field type="number" name="inrSavings" as={Input} />
+                <ErrorMessage name="inrSavings" />
+              </Item>
+            </Col>
+            <Col className="gutter-row" span={6}></Col>
           </Row>
           <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
             <Col className="gutter-row" span={6}>
