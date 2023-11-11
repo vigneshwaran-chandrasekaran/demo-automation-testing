@@ -27,6 +27,7 @@ interface FormTotalValues {
   aedTotal: number;
   inrTotal: number;
   inrSavings: number;
+  aedTotalinInr: number;
 }
 
 const validationSchema = Yup.object().shape({
@@ -101,7 +102,12 @@ function getPriceDetails(values: FormValues): FormTotalValues {
     inrPrice = calculatePrice(aedPrice, inrCardCharges);
   }
   console.log({ inrPrice });
-  return { inrTotal: inrPrice * aedToinr, aedTotal: aedPrice, inrSavings: 0 };
+  return {
+    inrTotal: inrPrice,
+    aedTotal: aedPrice,
+    inrSavings: 0,
+    aedTotalinInr: aedPrice * aedToinr,
+  };
 }
 
 const GoldForm: FC<IGoldFormProps> = () => {
@@ -110,10 +116,11 @@ const GoldForm: FC<IGoldFormProps> = () => {
     { setSubmitting, setFieldValue, resetForm }: FormikHelpers<FormValues>
   ) => {
     console.log("Submitted values:", values);
-    const { inrTotal, aedTotal } = getPriceDetails(values);
+    const { inrTotal, aedTotal, aedTotalinInr } = getPriceDetails(values);
 
     setFieldValue("aedTotal", aedTotal);
     setFieldValue("inrTotal", inrTotal);
+    setFieldValue("aedTotalinInr", aedTotalinInr);
 
     // resetForm();
     setSubmitting(false);
@@ -253,7 +260,18 @@ const GoldForm: FC<IGoldFormProps> = () => {
             </Col>
             <Col className="gutter-row" span={6}>
               <Item
-                label="INR Gold price"
+                label="AED Gold price"
+                labelCol={{ span: 24 }}
+                wrapperCol={{ span: 24 }}
+              >
+                <Field type="number" name="aedTotalinInr" as={Input} />
+                <ErrorMessage name="aedTotalinInr" />
+              </Item>
+            </Col>
+
+            <Col className="gutter-row" span={6}>
+              <Item
+                label="INR Total Amount"
                 labelCol={{ span: 24 }}
                 wrapperCol={{ span: 24 }}
               >
