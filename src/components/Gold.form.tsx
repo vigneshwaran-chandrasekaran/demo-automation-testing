@@ -166,56 +166,37 @@ const GoldForm: FC<IGoldFormProps> = () => {
               />
             </Col>
             <Col className="gutter-row" span={6}>
-              <Item
+              <FormInput
+                name="aedWastage"
                 label="AED Gold Wastage"
-                labelCol={{ span: 24 }}
-                wrapperCol={{ span: 24 }}
-              >
-                <Field type="number" name="aedWastage" as={Input} />
-                <ErrorMessage name="aedWastage" />
-              </Item>
+                type="number"
+              />
             </Col>
             <Col className="gutter-row" span={6}>
-              <Item
-                label="AED VAT Tax"
-                labelCol={{ span: 24 }}
-                wrapperCol={{ span: 24 }}
-              >
-                <Field type="number" name="aedVat" as={Input} />
-                <ErrorMessage name="aedVat" />
-              </Item>
+              <FormInput name="aedVat" label="AED VAT Tax" type="number" />
             </Col>
             <Col className="gutter-row" span={6}>
-              <Item
+              <FormInput
+                name="aedCardCharges"
                 label="AED Card Charges"
-                labelCol={{ span: 24 }}
-                wrapperCol={{ span: 24 }}
-              >
-                <Field type="number" name="aedCardCharges" as={Input} />
-                <ErrorMessage name="aedCardCharges" />
-              </Item>
+                type="number"
+              />
             </Col>
           </Row>
           <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
             <Col className="gutter-row" span={6}>
-              <Item
+              <FormInput
+                name="inrGoldPrice"
                 label="INR Gold price"
-                labelCol={{ span: 24 }}
-                wrapperCol={{ span: 24 }}
-              >
-                <Field type="number" name="inrGoldPrice" as={Input} />
-                <ErrorMessage name="inrGoldPrice" />
-              </Item>
+                type="number"
+              />
             </Col>
             <Col className="gutter-row" span={6}>
-              <Item
+              <FormInput
+                name="inrWastage"
                 label="INR Gold Wastage"
-                labelCol={{ span: 24 }}
-                wrapperCol={{ span: 24 }}
-              >
-                <Field type="number" name="inrWastage" as={Input} />
-                <ErrorMessage name="inrWastage" />
-              </Item>
+                type="number"
+              />
             </Col>
             <Col className="gutter-row" span={6}>
               <Item
