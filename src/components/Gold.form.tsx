@@ -1,7 +1,8 @@
 import { FC } from "react";
-import { Formik, Field, Form, ErrorMessage, FormikHelpers } from "formik";
+import { Formik, Field, Form, FormikHelpers } from "formik";
 import { Form as AntForm, Input, Button, Col, Row } from "antd";
 import * as Yup from "yup";
+import { ErrorMessage } from "../components/common";
 
 const { Item } = AntForm;
 
