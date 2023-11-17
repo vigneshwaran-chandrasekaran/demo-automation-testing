@@ -59,8 +59,11 @@ const initialValues: FormValues = {
   inrSavings: 0,
 };
 
+const roundToTwoDecimalPlaces = (amount: number): number =>
+  Number(amount.toFixed(2));
+
 const calculatePrice = (basePrice: number, percentage: number): number =>
-  Number((basePrice + basePrice * (percentage / 100)).toFixed(2));
+  roundToTwoDecimalPlaces(basePrice + basePrice * (percentage / 100));
 
 function getPriceDetails(values: FormValues): FormTotalValues {
   const {
@@ -75,54 +78,58 @@ function getPriceDetails(values: FormValues): FormTotalValues {
     inrGst,
     inrCardCharges,
   } = values;
+
   let aedPrice = goldInGrams * aedGoldPrice;
-  console.log({ aedPrice });
+  let inrPrice = goldInGrams * inrGoldPrice;
+
   if (aedWastage) {
     aedPrice = calculatePrice(aedPrice, aedWastage);
   }
+
   if (aedVat) {
     aedPrice = calculatePrice(aedPrice, aedVat);
   }
-  console.log({ aedPrice });
+
   if (aedCardCharges) {
     aedPrice = calculatePrice(aedPrice, aedCardCharges);
   }
-  console.log({ aedPrice });
-  let inrPrice = goldInGrams * inrGoldPrice;
-  console.log({ inrPrice });
 
   if (inrWastage) {
-    inrPrice = calculatePrice(aedPrice, inrWastage);
+    inrPrice = calculatePrice(inrPrice, inrWastage);
   }
+
   if (inrGst) {
-    inrPrice = calculatePrice(aedPrice, inrGst);
+    inrPrice = calculatePrice(inrPrice, inrGst);
   }
-  console.log({ inrPrice });
+
   if (inrCardCharges) {
-    inrPrice = calculatePrice(aedPrice, inrCardCharges);
+    inrPrice = calculatePrice(inrPrice, inrCardCharges);
   }
-  console.log({ inrPrice });
+
+  aedPrice = roundToTwoDecimalPlaces(aedPrice);
+  inrPrice = roundToTwoDecimalPlaces(inrPrice);
+  const aedTotalinInr = roundToTwoDecimalPlaces(aedPrice * aedToinr);
+
   return {
     inrTotal: inrPrice,
     aedTotal: aedPrice,
-    inrSavings: 0,
-    aedTotalinInr: aedPrice * aedToinr,
+    inrSavings: roundToTwoDecimalPlaces(inrPrice - aedTotalinInr),
+    aedTotalinInr,
   };
 }
 
 const GoldForm: FC<IGoldFormProps> = () => {
   const handleSubmit = (
     values: FormValues,
-    { setSubmitting, setFieldValue, resetForm }: FormikHelpers<FormValues>
+    { setSubmitting, setFieldValue }: FormikHelpers<FormValues>
   ) => {
-    console.log("Submitted values:", values);
-    const { inrTotal, aedTotal, aedTotalinInr } = getPriceDetails(values);
+    const { inrTotal, aedTotal, inrSavings, aedTotalinInr } =
+      getPriceDetails(values);
 
     setFieldValue("aedTotal", aedTotal);
     setFieldValue("inrTotal", inrTotal);
+    setFieldValue("inrSavings", inrSavings);
     setFieldValue("aedTotalinInr", aedTotalinInr);
-
-    // resetForm();
     setSubmitting(false);
   };
 
@@ -260,17 +267,6 @@ const GoldForm: FC<IGoldFormProps> = () => {
             </Col>
             <Col className="gutter-row" span={6}>
               <Item
-                label="AED Gold price"
-                labelCol={{ span: 24 }}
-                wrapperCol={{ span: 24 }}
-              >
-                <Field type="number" name="aedTotalinInr" as={Input} />
-                <ErrorMessage name="aedTotalinInr" />
-              </Item>
-            </Col>
-
-            <Col className="gutter-row" span={6}>
-              <Item
                 label="INR Total Amount"
                 labelCol={{ span: 24 }}
                 wrapperCol={{ span: 24 }}
@@ -281,7 +277,17 @@ const GoldForm: FC<IGoldFormProps> = () => {
             </Col>
             <Col className="gutter-row" span={6}>
               <Item
-                label="INR GST Tax"
+                label="AED price in INR"
+                labelCol={{ span: 24 }}
+                wrapperCol={{ span: 24 }}
+              >
+                <Field type="number" name="aedTotalinInr" as={Input} />
+                <ErrorMessage name="aedTotalinInr" />
+              </Item>
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <Item
+                label="INR Savings"
                 labelCol={{ span: 24 }}
                 wrapperCol={{ span: 24 }}
               >
