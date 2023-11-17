@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Formik, Field, Form, FormikHelpers } from "formik";
 import { Form as AntForm, Input, Button, Col, Row } from "antd";
 import * as Yup from "yup";
-import { ErrorMessage } from "../components/common";
+import { ErrorMessage, FormInput } from "../components/common";
 
 const { Item } = AntForm;
 
@@ -144,19 +144,12 @@ const GoldForm: FC<IGoldFormProps> = () => {
         <Form>
           <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
             <Col className="gutter-row" span={6}>
-              <Item
+              <FormInput
+                name="goldInGrams"
                 label="Gold in Grams"
-                labelCol={{ span: 24 }}
-                wrapperCol={{ span: 24 }}
-              >
-                <Field
-                  type="number"
-                  name="goldInGrams"
-                  as={Input}
-                  placeholder="Gold in Grams"
-                />
-                <ErrorMessage name="goldInGrams" />
-              </Item>
+                placeholder="Gold in Grams"
+                type="number"
+              />
             </Col>
             <Col className="gutter-row" span={6}>
               <Item
