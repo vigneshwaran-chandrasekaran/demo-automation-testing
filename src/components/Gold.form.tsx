@@ -139,7 +139,7 @@ const GoldForm: FC<IGoldFormProps> = () => {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      {({ isSubmitting }) => (
+      {({ isSubmitting, resetForm }) => (
         <Form>
           <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
             <Col className="gutter-row" span={6}>
@@ -298,12 +298,15 @@ const GoldForm: FC<IGoldFormProps> = () => {
             <Col className="gutter-row" span={6}></Col>
           </Row>
           <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-            <Col className="gutter-row" span={6}>
-              <Item>
-                <Button type="primary" htmlType="submit" loading={isSubmitting}>
-                  Submit
-                </Button>
-              </Item>
+            <Col className="gutter-row" span={2}>
+              <Button type="primary" htmlType="submit" loading={isSubmitting}>
+                Submit
+              </Button>
+            </Col>
+            <Col className="gutter-row" span={2}>
+              <Button type="default" onClick={() => resetForm()} danger>
+                Reset Form
+              </Button>
             </Col>
           </Row>
         </Form>
