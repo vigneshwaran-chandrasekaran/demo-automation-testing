@@ -11,6 +11,7 @@ interface ErrorMessageProps {
   label: string;
   placeholder?: string;
   type?: string;
+  disabled?: boolean;
 }
 
 const FormInput: React.FC<ErrorMessageProps> = ({
@@ -18,10 +19,17 @@ const FormInput: React.FC<ErrorMessageProps> = ({
   label,
   placeholder = "",
   type = "text",
+  ...props
 }) => {
   return (
     <Item label={label} labelCol={{ span: 24 }} wrapperCol={{ span: 24 }}>
-      <Field type={type} name={name} as={Input} placeholder={placeholder} />
+      <Field
+        {...props}
+        type={type}
+        name={name}
+        as={Input}
+        placeholder={placeholder}
+      />
       <ErrorMessage name={name} />
     </Item>
   );

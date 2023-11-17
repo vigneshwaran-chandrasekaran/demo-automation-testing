@@ -209,24 +209,20 @@ const GoldForm: FC<IGoldFormProps> = () => {
           </Row>
           <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
             <Col className="gutter-row" span={6}>
-              <FormInput name="aedTotal" label="AED Gold price" type="number" />
+              <FormInput name="aedTotal" label="AED Gold price" disabled />
             </Col>
             <Col className="gutter-row" span={6}>
-              <FormInput
-                name="inrTotal"
-                label="INR Total Amount"
-                type="number"
-              />
+              <FormInput name="inrTotal" label="INR Total Amount" disabled />
             </Col>
             <Col className="gutter-row" span={6}>
               <FormInput
                 name="aedTotalinInr"
                 label="AED price in INR"
-                type="number"
+                disabled
               />
             </Col>
             <Col className="gutter-row" span={6}>
-              <FormInput name="inrSavings" label="INR Savings" type="number" />
+              <FormInput name="inrSavings" label="INR Savings" disabled />
             </Col>
             <Col className="gutter-row" span={6}></Col>
           </Row>
