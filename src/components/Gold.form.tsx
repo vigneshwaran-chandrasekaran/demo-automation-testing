@@ -45,13 +45,13 @@ const validationSchema = Yup.object().shape({
 });
 
 const initialValues: FormValues = {
-  goldInGrams: 20,
+  goldInGrams: 18.38,
   aedToinr: 22.66,
   aedGoldPrice: 223.5,
   inrGoldPrice: 5635,
-  aedWastage: 10,
+  aedWastage: 0,
   aedVat: 5,
-  aedCardCharges: 2.5,
+  aedCardCharges: 0,
   inrWastage: 2.5,
   inrGst: 3,
   inrCardCharges: 0,
@@ -152,28 +152,18 @@ const GoldForm: FC<IGoldFormProps> = () => {
               />
             </Col>
             <Col className="gutter-row" span={6}>
-              <Item
-                label="AED to INR"
-                labelCol={{ span: 24 }}
-                wrapperCol={{ span: 24 }}
-              >
-                <Field type="number" name="aedToinr" as={Input} />
-                <ErrorMessage name="aedToinr" />
-              </Item>
+              <FormInput name="aedToinr" label="AED to INR" type="number" />
             </Col>
             <Col className="gutter-row" span={6}></Col>
             <Col className="gutter-row" span={6}></Col>
           </Row>
           <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
             <Col className="gutter-row" span={6}>
-              <Item
+              <FormInput
+                name="aedGoldPrice"
                 label="AED Gold Price"
-                labelCol={{ span: 24 }}
-                wrapperCol={{ span: 24 }}
-              >
-                <Field type="number" name="aedGoldPrice" as={Input} />
-                <ErrorMessage name="aedGoldPrice" />
-              </Item>
+                type="number"
+              />
             </Col>
             <Col className="gutter-row" span={6}>
               <Item
