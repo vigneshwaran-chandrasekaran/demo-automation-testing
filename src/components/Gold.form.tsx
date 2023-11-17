@@ -1,10 +1,8 @@
 import { FC } from "react";
-import { Formik, Field, Form, FormikHelpers } from "formik";
-import { Form as AntForm, Input, Button, Col, Row } from "antd";
+import { Formik, Form, FormikHelpers } from "formik";
+import { Button, Col, Row } from "antd";
 import * as Yup from "yup";
-import { ErrorMessage, FormInput } from "../components/common";
-
-const { Item } = AntForm;
+import { FormInput } from "../components/common";
 
 interface IGoldFormProps {}
 
@@ -199,66 +197,36 @@ const GoldForm: FC<IGoldFormProps> = () => {
               />
             </Col>
             <Col className="gutter-row" span={6}>
-              <Item
-                label="INR GST Tax"
-                labelCol={{ span: 24 }}
-                wrapperCol={{ span: 24 }}
-              >
-                <Field type="number" name="inrGst" as={Input} />
-                <ErrorMessage name="inrGst" />
-              </Item>
+              <FormInput name="inrGst" label="INR GST Tax" type="number" />
             </Col>
             <Col className="gutter-row" span={6}>
-              <Item
+              <FormInput
+                name="inrCardCharges"
                 label="INR Card Charges"
-                labelCol={{ span: 24 }}
-                wrapperCol={{ span: 24 }}
-              >
-                <Field type="number" name="inrCardCharges" as={Input} />
-                <ErrorMessage name="inrCardCharges" />
-              </Item>
+                type="number"
+              />
             </Col>
           </Row>
           <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
             <Col className="gutter-row" span={6}>
-              <Item
-                label="AED Gold price"
-                labelCol={{ span: 24 }}
-                wrapperCol={{ span: 24 }}
-              >
-                <Field type="number" name="aedTotal" as={Input} />
-                <ErrorMessage name="aedTotal" />
-              </Item>
+              <FormInput name="aedTotal" label="AED Gold price" type="number" />
             </Col>
             <Col className="gutter-row" span={6}>
-              <Item
+              <FormInput
+                name="inrTotal"
                 label="INR Total Amount"
-                labelCol={{ span: 24 }}
-                wrapperCol={{ span: 24 }}
-              >
-                <Field type="number" name="inrTotal" as={Input} />
-                <ErrorMessage name="inrTotal" />
-              </Item>
+                type="number"
+              />
             </Col>
             <Col className="gutter-row" span={6}>
-              <Item
+              <FormInput
+                name="aedTotalinInr"
                 label="AED price in INR"
-                labelCol={{ span: 24 }}
-                wrapperCol={{ span: 24 }}
-              >
-                <Field type="number" name="aedTotalinInr" as={Input} />
-                <ErrorMessage name="aedTotalinInr" />
-              </Item>
+                type="number"
+              />
             </Col>
             <Col className="gutter-row" span={6}>
-              <Item
-                label="INR Savings"
-                labelCol={{ span: 24 }}
-                wrapperCol={{ span: 24 }}
-              >
-                <Field type="number" name="inrSavings" as={Input} />
-                <ErrorMessage name="inrSavings" />
-              </Item>
+              <FormInput name="inrSavings" label="INR Savings" type="number" />
             </Col>
             <Col className="gutter-row" span={6}></Col>
           </Row>
