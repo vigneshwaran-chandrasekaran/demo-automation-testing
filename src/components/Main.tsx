@@ -4,19 +4,13 @@ import {
   NotificationOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import type { MenuProps } from "antd";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
 import { GoldForm, AntComponents } from "../components";
+import { Header } from "../components/common";
 
-const { Header, Content, Sider } = Layout;
-
-const items1: MenuProps["items"] = ["Login", "Signup", "Student Form"].map(
-  (key) => ({
-    key,
-    label: `${key}`,
-  })
-);
+const { Content, Sider } = Layout;
 
 const items2: MenuProps["items"] = [
   UserOutlined,
@@ -47,15 +41,7 @@ const Main: React.FC = () => {
 
   return (
     <Layout>
-      <Header style={{ display: "flex", alignItems: "center" }}>
-        <div className="demo-logo" />
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={["2"]}
-          items={items1}
-        />
-      </Header>
+      <Header />
       <Layout>
         <Sider width={200} style={{ background: colorBgContainer }}>
           <Menu
@@ -80,14 +66,12 @@ const Main: React.FC = () => {
               background: colorBgContainer,
             }}
           >
-            <BrowserRouter>
-              <Routes>
-                <Route index element={<GoldForm />} />
-                <Route path="gold" element={<GoldForm />} />
-                <Route path="antd" element={<AntComponents />} />
-                <Route path="*" element={<GoldForm />} />
-              </Routes>
-            </BrowserRouter>
+            <Routes>
+              <Route index element={<GoldForm />} />
+              <Route path="gold" element={<GoldForm />} />
+              <Route path="antd" element={<AntComponents />} />
+              <Route path="*" element={<GoldForm />} />
+            </Routes>
           </Content>
         </Layout>
       </Layout>
