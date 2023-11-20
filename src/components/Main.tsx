@@ -1,36 +1,10 @@
 import React from "react";
-import {
-  LaptopOutlined,
-  NotificationOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
-import { Routes, Route, Link } from "react-router-dom";
-import type { MenuProps } from "antd";
-import { Breadcrumb, Layout, Menu, theme } from "antd";
+import { Routes, Route } from "react-router-dom";
+import { Breadcrumb, Layout, theme } from "antd";
 import { GoldForm, AntComponents } from "../components";
-import { Header } from "../components/common";
+import { Header , Sidebar} from "../components/common";
 
-const { Content, Sider } = Layout;
-
-const items2: MenuProps["items"] = [
-  {
-    key: `sub1`,
-    icon: <LaptopOutlined />,
-    label: `subnav`,
-    children: [
-      {
-        key: "/menu-1",
-        label: <Link to="/antd">ANTD</Link>,
-        icon: <UserOutlined />,
-      },
-      {
-        key: "/menu-2",
-        label: <Link to="/gold">Gold</Link>,
-        icon: <NotificationOutlined />,
-      },
-    ],
-  },
-];
+const { Content } = Layout;
 
 const Main: React.FC = () => {
   const {
@@ -41,15 +15,7 @@ const Main: React.FC = () => {
     <Layout>
       <Header />
       <Layout>
-        <Sider width={200} style={{ background: colorBgContainer }}>
-          <Menu
-            mode="inline"
-            defaultSelectedKeys={["1"]}
-            defaultOpenKeys={["sub1"]}
-            style={{ height: "100%", borderRight: 0 }}
-            items={items2}
-          />
-        </Sider>
+        <Sidebar />
         <Layout style={{ padding: "0 24px 24px" }}>
           <Breadcrumb style={{ margin: "16px 0" }}>
             <Breadcrumb.Item>Home</Breadcrumb.Item>
