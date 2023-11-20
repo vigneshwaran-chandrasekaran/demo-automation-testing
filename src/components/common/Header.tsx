@@ -16,17 +16,17 @@ const items1 = [
   },
   {
     key: "/sum-gold",
-    label: "This is parent menu",
+    label: "Form",
     icon: <UserOutlined />,
     children: [
       {
         key: "/menu-1",
-        label: <Link to="/menu-1">Sub Menu 1</Link>,
+        label: <Link to="/gold">Gold</Link>,
         icon: <UserOutlined />,
       },
       {
         key: "/menu-2",
-        label: <Link to="/menu-2">Sub Menu 2</Link>,
+        label: <Link to="/antd">ANTD</Link>,
         icon: <UserOutlined />,
       },
     ],

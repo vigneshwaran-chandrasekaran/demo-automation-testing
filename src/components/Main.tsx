@@ -4,7 +4,7 @@ import {
   NotificationOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import type { MenuProps } from "antd";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
 import { GoldForm, AntComponents } from "../components";
@@ -13,26 +13,24 @@ import { Header } from "../components/common";
 const { Content, Sider } = Layout;
 
 const items2: MenuProps["items"] = [
-  UserOutlined,
-  LaptopOutlined,
-  NotificationOutlined,
-].map((icon, index) => {
-  const key = String(index + 1);
-
-  return {
-    key: `sub${key}`,
-    icon: React.createElement(icon),
-    label: `subnav ${key}`,
-
-    children: new Array(4).fill(null).map((_, j) => {
-      const subKey = index * 4 + j + 1;
-      return {
-        key: subKey,
-        label: `option${subKey}`,
-      };
-    }),
-  };
-});
+  {
+    key: `sub1`,
+    icon: <LaptopOutlined />,
+    label: `subnav`,
+    children: [
+      {
+        key: "/menu-1",
+        label: <Link to="/antd">ANTD</Link>,
+        icon: <UserOutlined />,
+      },
+      {
+        key: "/menu-2",
+        label: <Link to="/gold">Gold</Link>,
+        icon: <NotificationOutlined />,
+      },
+    ],
+  },
+];
 
 const Main: React.FC = () => {
   const {
