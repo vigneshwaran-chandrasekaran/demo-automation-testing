@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Formik, Form, FormikHelpers } from "formik";
 import { Button, Col, Row } from "antd";
 import * as Yup from "yup";
-import { FormInput } from "../components/common";
+import { FormInput } from "../common";
 
 interface IGoldFormProps {}
 
