@@ -245,3 +245,9 @@ const GoldForm: FC<IGoldFormProps> = () => {
 };
 
 export default GoldForm;
+
+
+// https://goldprice.org/gold-price-united-arab-emirates.html
+// https://gulfnews.com/gold-forex/historical-gold-rates
+// https://igold.ae/gold-rate/24-carat
+// https://www.uaegoldprice.com/
