@@ -132,6 +132,31 @@ const GoldForm: FC<IGoldFormProps> = () => {
     setSubmitting(false);
   };
 
+  const myHeaders = new Headers();
+  myHeaders.append("x-access-token", "goldapi-11scyvmslybldy0m-io");
+  myHeaders.append("Content-Type", "application/json");
+
+  // type Dictionary = {
+  //   method: String;
+  //   headers: any;
+  //   redirect: String;
+  // };
+
+  // const requestOptions: Dictionary = {
+  //   method: "GET",
+  //   headers: myHeaders,
+  //   redirect: "follow",
+  // };
+
+  fetch("https://www.goldapi.io/api/XAU/INR", {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow",
+  })
+    .then((response) => response.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.log("error", error));
+
   return (
     <Formik
       initialValues={initialValues}
@@ -245,7 +270,6 @@ const GoldForm: FC<IGoldFormProps> = () => {
 };
 
 export default GoldForm;
-
 
 // https://goldprice.org/gold-price-united-arab-emirates.html
 // https://gulfnews.com/gold-forex/historical-gold-rates
